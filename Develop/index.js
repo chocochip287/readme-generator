@@ -6,11 +6,15 @@ const inquirer = require('inquirer');
 
 var licenseBadge = '';
 
-// TODO: Create an array of questions for user input
+// Questions to solicit user input
 const questions = ['What is the name of your application?', 'Please provide a brief description of your application.', 'Please provide installation instructions for your application or confirm that no installations are needed.', 'Please provide a brief description of how your application is used.', 'Please select the license for your application', 'Tests?', 'Questions?'];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// function to write the README file and implement the collected data
+const makeREADME = ({appName, appDesc, appInstall, appUsage, appLicense, appTests, appQuestions}) =>
+`
+ehehehe my readme is here
+`
+;
 
 // TODO: Create a function to initialize app
 function init() {
@@ -61,8 +65,19 @@ function init() {
     ])
     .then((responses) => {
     console.log(responses);
-    console.log(`the app's license is ${responses.appLicense}.`)
+    console.log(`the app's license is ${responses.appLicense}.`);
     licenseBadge = responses.appLicense;
+    console.log(`-----------`);
+    
+
+    // sets the data to be plugged into the README file
+    const answersContent = makeREADME(responses);
+
+    // writes the README file
+    fs.writeFile('README.md', answersContent, (err) =>
+        err ? console.log(err) : console.log("Your README has been generated.")
+        );
+
     scopeTester();
     });
     
