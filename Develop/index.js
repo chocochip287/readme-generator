@@ -12,7 +12,41 @@ const questions = ['What is the name of your application?', 'Please provide a br
 // function to write the README file and implement the collected data
 const makeREADME = ({appName, appDesc, appInstall, appUsage, appLicense, appTests, appQuestions}) =>
 `
-ehehehe my readme is here
+    # ${appName}
+
+    ## Description
+
+    ${appDesc}
+
+    ## Table of Contents
+
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Credits](#credits)
+    - [License](#license)
+
+    ## Installation Instructions
+
+    ${appInstall}
+
+    ## Usage
+
+    ${appUsage}
+
+    ## License
+
+    ${appLicense}
+
+    ## Tests
+
+    ${appTests}
+
+    ## Questions
+
+    ${appQuestions}
+
+    ## Contributor(s)
+
 `
 ;
 
