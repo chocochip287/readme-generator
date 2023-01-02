@@ -1,20 +1,18 @@
-// TODO: Include packages needed for this application
+// required packages for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-// global variable(s)
-
-var licenseBadge = '';
-
 // Questions to solicit user input
-const questions = ['What is the name of your application?', 'Please provide a brief description of your application.', 'Please provide installation instructions for your application or confirm that no installations are needed.', 'Please provide a brief description of how your application is used.', 'Please select the license for your application', 'Tests', 'Questions','Please provide the GitHub username of the app author'];
+const questions = ["What is the name of your application?", "Please provide a brief description of your application.", "Please provide installation instructions for your application or confirm that no installations are needed.", "Please provide brief instructions for how to use your app.", "Please select the license for your application", "Tests", "Questions", "Please provide the GitHub username of the app author.", "Please provide the author's email address."];
 
 // function to write the README file and implement the collected data
-const makeREADME = ({appName, appDesc, appInstall, appUsage, appLicense, appTests, appQuestions}) => 
+const makeREADME = ({appName, appDesc, appInstall, appUsage, appLicense, appTests, appQuestions, appAuthor, authorEmail}) => 
 `
 # ${appName}
 
-License: [![License: ${appLicense}](https://img.shields.io/badge/License-${appLicense}-yellow.svg)]
+## License
+
+![License: ${appLicense}](https://img.shields.io/badge/License-${appLicense}-yellow.svg)
 
 ## Description
 
@@ -35,10 +33,6 @@ ${appInstall}
 
 ${appUsage}
 
-## License
-
-${appLicense}
-
 ## Tests
 
 ${appTests}
@@ -49,12 +43,15 @@ ${appQuestions}
 
 ## App Author
 
+${appAuthor} - [GitHub](https://github.com/${appAuthor})
 
+## Author's Email
 
-`
-;
+${authorEmail}
 
-// TODO: Create a function to initialize app
+`;
+
+// function that runs on app initialization to ask questions
 function init() {
     inquirer.prompt([
         {
@@ -86,7 +83,7 @@ function init() {
             type: 'list',
             name: 'appLicense',
             message: questions[4],
-            choices: ['GitHub', 'Eclipse Marketplace', 'AUR license']
+            choices: ['GitHub', 'MIT']
         },
         {
             // collects tests for the app if applicable
@@ -101,38 +98,29 @@ function init() {
             message: questions[6],
         },
         {
-            // collects contributor/author information
+            // collects contributor/author's github username
             type: 'input',
             name: 'appAuthor',
             message: questions[7],
         },
+        {
+            // collects contributor/author's email
+            type: 'input',
+            name: 'authorEmail',
+            message: questions[8],
+        }
     ])
     .then((responses) => {
-    console.log(responses);
-    console.log(`the app's license is ${responses.appLicense}.`);
-    licenseBadge = responses.appLicense;
-    console.log(`-----------`);
-    
 
     // sets the data to be plugged into the README file
     const answersContent = makeREADME(responses);
 
-    // writes the README file
+    // writes the README file into the top level directory
     fs.writeFile('../README.md', answersContent, (err) =>
         err ? console.log(err) : console.log("Your README has been generated.")
         );
-
-    scopeTester();
     });
-    
 }
 
-// Function call to initialize app
+// Function call to run on app initialization
 init();
-
-// scope testing function
-
-function scopeTester() {
-    console.log('Below me is the licenseBadge test!')
-    console.log(licenseBadge);
-}
