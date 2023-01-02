@@ -10,42 +10,42 @@ var licenseBadge = '';
 const questions = ['What is the name of your application?', 'Please provide a brief description of your application.', 'Please provide installation instructions for your application or confirm that no installations are needed.', 'Please provide a brief description of how your application is used.', 'Please select the license for your application', 'Tests?', 'Questions?'];
 
 // function to write the README file and implement the collected data
-const makeREADME = ({appName, appDesc, appInstall, appUsage, appLicense, appTests, appQuestions}) =>
+const makeREADME = ({appName, appDesc, appInstall, appUsage, appLicense, appTests, appQuestions}) => 
 `
-    # ${appName}
+# ${appName}
 
-    ## Description
+## Description
 
-    ${appDesc}
+${appDesc}
 
-    ## Table of Contents
+## Table of Contents
 
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Credits](#credits)
-    - [License](#license)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [License](#license)
 
-    ## Installation Instructions
+## Installation Instructions
 
-    ${appInstall}
+${appInstall}
 
-    ## Usage
+## Usage
 
-    ${appUsage}
+${appUsage}
 
-    ## License
+## License
 
-    ${appLicense}
+${appLicense}
 
-    ## Tests
+## Tests
 
-    ${appTests}
+${appTests}
 
-    ## Questions
+## Questions
 
-    ${appQuestions}
+${appQuestions}
 
-    ## Contributor(s)
+## Contributor(s)
 
 `
 ;
@@ -108,7 +108,7 @@ function init() {
     const answersContent = makeREADME(responses);
 
     // writes the README file
-    fs.writeFile('README.md', answersContent, (err) =>
+    fs.writeFile('../README.md', answersContent, (err) =>
         err ? console.log(err) : console.log("Your README has been generated.")
         );
 
