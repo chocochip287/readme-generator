@@ -24,6 +24,8 @@ Clone the application's repository to your local machine. From your machine's te
 
 Provide brief responses to each open ended question and select a license when prompted. The application does the rest.
 
+A video demonstrating the application's usage can be seen here: [YouTube](https://www.youtube.com/watch?v=J5uXPhSl2xw)
+
 ## Tests
 
 None short of lots of rinse, repeat, and new commits.
