@@ -7,12 +7,14 @@ const inquirer = require('inquirer');
 var licenseBadge = '';
 
 // Questions to solicit user input
-const questions = ['What is the name of your application?', 'Please provide a brief description of your application.', 'Please provide installation instructions for your application or confirm that no installations are needed.', 'Please provide a brief description of how your application is used.', 'Please select the license for your application', 'Tests?', 'Questions?'];
+const questions = ['What is the name of your application?', 'Please provide a brief description of your application.', 'Please provide installation instructions for your application or confirm that no installations are needed.', 'Please provide a brief description of how your application is used.', 'Please select the license for your application', 'Tests', 'Questions','Please provide the GitHub username of the app author'];
 
 // function to write the README file and implement the collected data
 const makeREADME = ({appName, appDesc, appInstall, appUsage, appLicense, appTests, appQuestions}) => 
 `
 # ${appName}
+
+License: [![License: ${appLicense}](https://img.shields.io/badge/License-${appLicense}-yellow.svg)]
 
 ## Description
 
@@ -45,7 +47,9 @@ ${appTests}
 
 ${appQuestions}
 
-## Contributor(s)
+## App Author
+
+
 
 `
 ;
@@ -95,6 +99,12 @@ function init() {
             type: 'input',
             name: 'appQuestions',
             message: questions[6],
+        },
+        {
+            // collects contributor/author information
+            type: 'input',
+            name: 'appAuthor',
+            message: questions[7],
         },
     ])
     .then((responses) => {
